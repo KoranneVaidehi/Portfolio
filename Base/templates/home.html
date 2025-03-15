@@ -1,0 +1,559 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vaidehi Koranne - Portfolio</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+            background-color: #0a192f; /* Deep navy blue */
+            color: #ccd6f6; /* Light grayish-blue for text */
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        /* Navbar */
+        #navbar {
+            position: sticky;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            background-color: #0a192f;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 0;
+        }
+
+        #navbar ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+
+        #navbar ul li {
+            margin: 0 1.5rem;
+        }
+
+        #navbar ul li a {
+            text-decoration: none;
+            color: #ccd6f6;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+        }
+
+        #navbar ul li a:hover {
+            background-color: rgba(100, 255, 218, 0.1); /* Teal accent */
+            border-radius: 0.4rem;
+            color: #64ffda; /* Teal accent */
+        }
+
+        /* Home Section */
+        .home-left, .home-right {
+            width: 50%;
+            padding: 7rem;
+        }
+
+        .home-left h6, .home-left h4 {
+            color: #64ffda; /* Teal accent */
+            margin: 1rem 0;
+            font-size: 2.5rem;
+        }
+
+        .home-left h1 {
+            font-size: 4rem;
+            color: #ccd6f6;
+            margin-bottom: 1rem;
+        }
+
+        .home-left p {
+            font-size: 1.2rem;
+            color: #8892b0; /* Lighter grayish-blue */
+        }
+
+        .home-right img {
+            width: 115%;
+            border-radius: 60%;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* About Section */
+        .about-left, .about-right {
+            width: 50%;
+        }
+
+        .about-left img {
+            width: 90%;
+            border-radius: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .about-right {
+            padding: 0 4rem;
+        }
+
+        .about-content h2 {
+            font-size: 7.5rem;
+            color: #64ffda; /* Teal accent */
+            margin-bottom: 1rem;
+        }
+
+        .about-content p {
+            font-size: 1.5rem;
+            color: #8892b0; /* Lighter grayish-blue */
+            margin-bottom: 2rem;
+        }
+
+        /* Skills Section */
+        #skills {
+            margin-top: 2.5rem;
+            padding: 2rem 0;
+            background-color:rgba(8, 54, 139, 0.93);
+        }
+
+        h1.t-center {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 2rem;
+        }
+
+        .services-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .skills-container {
+            width: 90%;
+            max-width: 600px;
+        }
+
+        .skills-left img {
+            width: 90%;
+            max-width: 500px;
+            border-radius: 20px;
+        }
+
+        /* Progress Bar Styles */
+        .bar {
+            position: relative;
+            margin: 2rem 0;
+        }
+
+        .bar-content {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.2rem;
+            font-size: 1.2rem;
+            color:rgb(128, 150, 222); /* Light grayish-blue for text */
+        }
+
+        .progress {
+            width: 100%;
+            height: 10px; /* Height of the progress bar */
+            background: rgba(33, 15, 81, 0.1); /* Light white-blue background */
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 90%;
+            background: #64ffda; /* Teal accent for progress fill */
+            border-radius: 10px;
+            animation: fillAnimation 2s ease-in-out forwards;
+        }
+
+        /* Progress Bar Widths with Custom Properties */
+        .bar.python .progress-fill { --fill-width: 90%; width: 90%; }
+        .bar.html .progress-fill { --fill-width: 90%; width: 90%; }
+        .bar.css .progress-fill { --fill-width: 80%; width: 80%; }
+        .bar.js .progress-fill { --fill-width: 65%; width: 65%; }
+        .bar.django .progress-fill { --fill-width: 50%; width: 50%; }
+        .bar.mysql .progress-fill { --fill-width: 30%; width: 30%; }
+
+        /* Animation */
+        @keyframes fillAnimation {
+            from { width: 0; }
+            to { width: var(--fill-width); }
+        }
+
+        /* Projects Section */
+        .projects-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: 3rem 0;
+        }
+
+        .projects-item {
+            width: 25rem;
+            margin: 1rem;
+            background: #112240; /* Darker blue */
+            border-radius: 1.5rem;
+            padding: 2rem 2rem;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .projects-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .projects-item h1 {
+            font-size: 1.5rem;
+            color: #64ffda; /* Teal accent */
+            margin-bottom: 1rem;
+        }
+
+        .projects-item p {
+            font-size: 1.2rem;
+            color: #8892b0; /* Lighter grayish-blue */
+        }
+
+        /* Contact Section */
+        .form {
+            width: 80%;
+            margin: auto;
+            padding: 2rem;
+        }
+
+        .form-div input, .form-div textarea {
+            width: 100%;
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 0.5rem;
+            background-color: transparent;
+            color: #ccd6f6;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-div input:focus, .form-div textarea:focus {
+            border-color: #64ffda; /* Teal accent */
+            outline: none;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            background-color: #64ffda; /* Teal accent */
+            color: #0a192f; /* Deep navy blue */
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #52d1b2; /* Slightly darker teal */
+        }
+
+        /* Footer Section */
+        #footer {
+            background-color: #020c1b; /* Darker navy blue */
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        #footer ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin-bottom: 1rem;
+        }
+
+        #footer ul li {
+            margin: 0 1rem;
+        }
+
+        #footer ul li a {
+            color: #ccd6f6;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        #footer ul li a:hover {
+            color: #64ffda; /* Teal accent */
+        }
+
+        #footer p {
+            color: #8892b0; /* Lighter grayish-blue */
+            font-size: 0.9rem;
+        }
+
+        /* Utility Classes */
+        .flex { display: flex; }
+        .s-between { justify-content: space-between; }
+        .s-around { justify-content: space-around; }
+        .s-center { justify-content: center; }
+        .items-center { align-items: center; }
+        .f-col { flex-direction: column; }
+        .p-relative { position: relative; }
+        .t-white { color: #ccd6f6; }
+        .bg-color { background-color: #0a192f; }
+        .t-center { text-align: center; }
+        .my-2 { margin: 2rem 0; }
+        .f-2 { font-size: 2rem; }
+        .m-b-1 { margin-bottom: 1rem; }
+        .w-50 { width: 50%; }
+        .w-80 { width: 80%; }
+        .h-50 { height: 50vh; }
+        .mx-1 { margin: 0 1rem; }
+        .m-top { margin-top: 1rem; }
+        .m-auto { margin: auto; }
+    </style>
+</head>
+<body>
+    <!-- Navbar Section -->
+    <nav id="navbar" class="flex s-around bg-color">
+        <div class="left-nav">
+            <h2 class="t-white">Portfolio</h2>
+        </div>
+        <div class="right-nav">
+            <ul class="flex">
+                <li><a href="#home" class="t-white roboto">Home <i class="fa-solid fa-house"></i></a></li>
+                <li><a href="#about" class="t-white roboto">About Me <i class="fa-solid fa-user"></i></a></li>
+                <li><a href="#skills" class="t-white roboto">Skills <i class="fa-solid fa-code"></i></a></li>
+                <li><a href="#projects" class="t-white roboto">Projects <i class="fas fa-project-diagram"></i></a></li>
+                <li><a href="#contact" class="t-white roboto">Contact <i class="fa-solid fa-rocket"></i></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="flex s-around sw-80 m-auto">
+        <div class="home-left flex items-center">
+            <div class="home-content">
+                <h6 class="poppinss">Hi, I'm</h6>
+                <h1 class="t-white">Vaidehi Koranne</h1>
+                <h4 class="poppinss">Engineering Student</h4>
+                <a href="{% static 'PDF/Vaidehi_Resume.pdf' %}" target="_blank">
+                    <button class="btn poppins">Resume</button>
+                </a>
+                <a class="btn live poppins" id="hireme" href="https://www.linkedin.com/in/vaidehi-koranne/" target="_blank">Let's Talk</a>
+            </div>
+        </div>
+        <div class="home-right flex s-center items-center">
+            <div class="circle flex s-center items-center" id="mainImage">
+                <img src="{% static 'images/vaidehii.jpg' %}" alt="picture">
+            </div>
+        </div>
+    </section>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <!-- About Section -->
+    <section id="about">
+        <h1 class="t-center my-2 t-white f-2">About Me</h1>
+        <div class="about-container flex s-around">
+            <div class="about-left flex s-center items-center">
+                <img src="{% static 'images/vaidehii.jpg' %}" alt="" style="width: 60%;">
+            </div>
+            <div class="about-right flex">
+                <div class="about-content">
+                    <h1 class="t-white m-b-1 poppins">Vaidehi Koranne</h1>
+                    <p class="t-white poppins">
+                        My name is Vaidehi. I'm a B.Tech student at Parul University, currently in my 2nd year, 4th semester, pursuing Computer Science & Engineering.
+                        I am passionate about backend development and have been learning Python extensively. I have gained proficiency in Django and Flask and will be working on projects based on these frameworks and contributed to a hackathon project.
+                        My goal is to create powerful and optimized backend systems that support seamless user experiences.
+                    </p>
+                    <a class="btn" id="hireme" href="https://www.linkedin.com/in/vaidehi-koranne/">Hire Me</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h1 class="t-center my-2 t-white f-2">Skills</h1>
+        <div class="services-container flex s-around">
+            <div class="skills-left flex s-center items-center">
+                <img src="{% static 'images/codingImgg.jpg' %}" alt="">
+            </div>
+            <div class="skills-right flex items-center">
+                <div class="skills-container">
+                    <!-- Python Progress Bar -->
+                    <div class="bar python">
+                        <div class="bar-content">
+                            <span class="left">Python</span>
+                            <span class="right-skills">90%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-fill"></div>
+                        </div>
+                    </div>
+                    <!-- HTML Progress Bar -->
+                    <div class="bar html">
+                        <div class="bar-content">
+                            <span class="left">HTML</span>
+                            <span class="right-skills">90%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-fill"></div>
+                        </div>
+                    </div>
+                    <!-- CSS Progress Bar -->
+                    <div class="bar css">
+                        <div class="bar-content">
+                            <span class="left">CSS</span>
+                            <span class="right-skills">80%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-fill"></div>
+                        </div>
+                    </div>
+                    <!-- JavaScript Progress Bar -->
+                    <div class="bar js">
+                        <div class="bar-content">
+                            <span class="left">C</span>
+                            <span class="right-skills">80%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-fill"></div>
+                        </div>
+                    </div>
+                    <!-- Django Progress Bar -->
+                    <div class="bar django">
+                        <div class="bar-content">
+                            <span class="left">Django</span>
+                            <span class="right-skills">75%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-fill"></div>
+                        </div>
+                    </div>
+                    <!-- MySQL Progress Bar -->
+                    <div class="bar mysql">
+                        <div class="bar-content">
+                            <span class="left">MySQL</span>
+                            <span class="right-skills">50%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-fill"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h1 class="t-center my-2 t-white f-2">Projects</h1>
+        <div class="projects-container flex s-center">
+            <div class="projects-item flex f-col s-center items-center">
+                <h1 class="t-white poppins">My Portfolio</h1>
+                <p class="t-white poppins">
+                    This is a personal portfolio website built using Django, HTML, CSS, and Python. It is designed to showcase my projects, skills, and contact details in an interactive and professional manner. The website serves as an online resume and portfolio, allowing visitors to explore my work, learn about my expertise, and get in touch with me easily.
+                </p>
+                <div class="buttons flex s-around">
+                    <a href="https://github.com/KoranneVaidehi/Portfolio" target="_blank" class="btn mx-1 m-top">GitHub</a>
+                    {% comment %} <a href="#" target="_blank" class="btn m-top live">Live Link</a> {% endcomment %}
+                </div>
+            </div>
+            <div class="projects-item flex f-col s-center items-center">
+                <h1 class="t-white poppins">Employee and Task Management System </h1>
+                <p class="t-white poppins">
+                    The Employee and Task Management System is a web-based application built using Django and MySQL. It allows administrators and managers to manage employees, assign tasks, track performance, approve leaves, and facilitate communication via real-time chat and video meetings.
+                </p>
+                <div class="buttons flex s-around">
+                    <a href="https://github.com/KoranneVaidehi/Employee-and-Task-Management-System" target="_blank" class="btn mx-1 m-top">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <!-- Contact Section -->
+    <section id="contact" class="m-b-1">
+        <h1 class="t-center my-2 t-white f-2">Contact Me</h1>
+        <div class="contact-container flex s-around items-centers">
+            <div class="form" id="contactForm">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="name form-div">
+                        <input type="text" name="name" id="name" class="poppins" placeholder="Enter Your Name">
+                    </div>
+                    <div class="email form-div">
+                        <input type="email" name="email" id="email" class="poppins" placeholder="Enter Your Email" required>
+                    </div>
+                    <div class="phone form-div">
+                        <input type="phone" name="number" id="number" class="poppins" placeholder="Enter Your Phone" required>
+                    </div>
+                    <div class="textarea form-div">
+                        <textarea name="content" id="textarea" cols="30" rows="10" class="poppins" placeholder="Enter Messages"></textarea>
+                    </div>
+                    <button type="submit" class="btn poppins" id="submit">Send</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer id="footer">
+        <ul class="flex s-center w-80 m-auto my-2 res">
+            <li><a href="#home" class="poppinss">Home</a></li>
+            <li><a href="#about" class="poppinss">About</a></li>
+            <li><a href="#skills" class="poppinss">Skills</a></li>
+            <li><a href="#projects" class="poppinss">Projects</a></li>
+            <li><a href="#contact" class="poppinss">Contact</a></li>
+        </ul>
+        <ul class="flex s-center w-80 font-awesome">
+            <a href="https://www.linkedin.com/in/vaidehi-koranne/" target="_blank" rel="noopener noreferrer">
+                <li><i class="fa-brands fa-linkedin-in"></i></li>
+            </a>
+            <a href="https://github.com/KoranneVaidehi" target="_blank" rel="noopener noreferrer">
+                <li><i class="fa-brands fa-github"></i></li>
+            </a>
+            <a href="https://www.instagram.com/_vaidehi_9604/" target="_blank" rel="noopener noreferrer">
+                <li><i class="fa-brands fa-instagram"></i></li>
+            </a>
+        </ul>
+        <p class="t-center my-2 poppins">&copy; All Rights Reserved - <span class="cpy-white poppins">Vaidehi Koranne</span></p>
+    </footer>
+</body>
+</html>
